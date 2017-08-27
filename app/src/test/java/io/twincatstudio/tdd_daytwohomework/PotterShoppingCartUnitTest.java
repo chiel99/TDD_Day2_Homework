@@ -4,11 +4,19 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-/**
- * Example local unit test, which will execute on the development machine (host).
- *
- * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
- */
 public class PotterShoppingCartUnitTest {
 
+    @Test
+    public void getTotalPrice_chapter1_1_should_return_100() {
+        // Arrange
+        PotterShoppingCart target = new PotterShoppingCart();
+        target.addChapter(1, 1);
+        int expected = 100;
+
+        // Act
+        int actual = target.getTotalPrice();
+
+        // Assert
+        assertEquals(expected, actual);
+    }
 }
