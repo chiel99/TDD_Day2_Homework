@@ -10,7 +10,7 @@ public class PotterShoppingCartUnitTest {
     public void getTotalPrice_chapter1_1_should_return_100() {
         // Arrange
         PotterShoppingCart target = new PotterShoppingCart();
-        target.addChapter(1, 1);
+        target.addBooks(1, 1);
         int expected = 100;
 
         // Act
