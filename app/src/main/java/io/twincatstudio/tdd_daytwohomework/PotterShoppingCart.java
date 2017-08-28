@@ -9,11 +9,16 @@ class PotterShoppingCart {
     }
 
     public int getTotalPrice() {
-        int price = 0;
+        int price;
+        double discount = 1.0;
 
-        for (int i = 0 ; i < mBooks.length ; i++) {
+        price = mBooks[0] * 100;
+        for (int i = 1 ; i < mBooks.length ; i++) {
             price += mBooks[i] * 100;
+            if (mBooks[i] > 0 && mBooks[i-1] > 0) {
+                discount = 0.95;
+            }
         }
-        return price;
+        return (int)(price * discount);
     }
 }
