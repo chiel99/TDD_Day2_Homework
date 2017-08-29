@@ -1,7 +1,8 @@
 package io.twincatstudio.tdd_daytwohomework;
 
 class PotterShoppingCart {
-    private int[] mBooks = new int[5];
+    private static final int MAX_SERIES = 5;
+    private int[] mBooks = new int[MAX_SERIES];
 
     public void addBooks(int series, int number) {
         mBooks[series-1] += number;
@@ -9,32 +10,34 @@ class PotterShoppingCart {
 
     public int getTotalPrice() {
         int price = 0;
-        double discount = 1.0;
-
-        int[] books = new int[5];
+        int[] books = new int[MAX_SERIES];
         System.arraycopy(mBooks, 0, books, 0, mBooks.length);
 
-        while (true) {
-            int countOfSeries = 0;
+        int countOfSeries;
+        do {
+            countOfSeries = 0;
             for (int i = 0 ; i < books.length ; i++) {
                 if (books[i] > 0) {
                     countOfSeries++;
                     books[i]--;
                 }
             }
-            if (countOfSeries == 0) {
-                // no books
-                break;
-            } else if (countOfSeries == 1) {
-                discount = 1.0;
-            } else if (countOfSeries == 2) {
-                discount = 0.95;
-            } else if (countOfSeries == 3) {
-                discount = 0.9;
-            }
+
+            double discount = getDiscount(countOfSeries);
             price += countOfSeries * 100 * discount;
-        }
+        } while (countOfSeries > 0);
 
         return price;
+    }
+
+    private double getDiscount(int countOfSeries) {
+        switch (countOfSeries) {
+            case 2:
+                return 0.95;
+            case 3:
+                return 0.9;
+            default:
+                return 1.0;
+        }
     }
 }
