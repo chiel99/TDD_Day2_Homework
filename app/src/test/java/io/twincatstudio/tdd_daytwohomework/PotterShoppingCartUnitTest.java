@@ -135,4 +135,40 @@ public class PotterShoppingCartUnitTest {
         // Assert
         assertEquals(expected, actual);
     }
+
+    @Test
+    public void getTotalPrice_book1_2_book2_2_book3_2_book4_2_book5_1_should_return_695() throws Exception {
+        // Arrange
+        PotterShoppingCart target = new PotterShoppingCart();
+        target.addBooks(1, 2);
+        target.addBooks(2, 2);
+        target.addBooks(3, 2);
+        target.addBooks(4, 2);
+        target.addBooks(5, 1);
+        int expected = 695;
+
+        // Act
+        int actual = target.getTotalPrice();
+
+        // Assert
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void getTotalPrice_book1_4_book2_4_book3_4_book4_2_book5_2_should_return_1280() throws Exception {
+        // Arrange
+        PotterShoppingCart target = new PotterShoppingCart();
+        target.addBooks(1, 4);
+        target.addBooks(2, 4);
+        target.addBooks(3, 4);
+        target.addBooks(4, 2);
+        target.addBooks(5, 2);
+        int expected = 1280;
+
+        // Act
+        int actual = target.getTotalPrice();
+
+        // Assert
+        assertEquals(expected, actual);
+    }
 }
