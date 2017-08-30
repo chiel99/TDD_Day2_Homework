@@ -13,19 +13,41 @@ class PotterShoppingCart {
         int[] books = new int[MAX_SERIES];
         System.arraycopy(mBooks, 0, books, 0, mBooks.length);
 
-        int countOfSeries;
+        int maxCount = 0;
+        for (int count : books) {
+            maxCount = Math.max(maxCount, count);
+        }
+        if (maxCount == 0) {
+            return 0;
+        }
+
+        int[] countOfSeries = new int[maxCount+1];
+        int round = 0;
+
         do {
-            countOfSeries = 0;
             for (int i = 0 ; i < books.length ; i++) {
                 if (books[i] > 0) {
-                    countOfSeries++;
+                    countOfSeries[round]++;
                     books[i]--;
                 }
             }
 
-            double discount = getDiscount(countOfSeries);
-            price += countOfSeries * 100 * discount;
-        } while (countOfSeries > 0);
+            double discount = getDiscount(countOfSeries[round]);
+            price += countOfSeries[round] * 100 * discount;
+        } while (countOfSeries[round++] > 0);
+
+        // Handle Special case: 4+4 = 640 < 5+3 = 645
+        int countFive = 0;
+        int countThree = 0;
+        for (int count : countOfSeries) {
+            if (count == 5) {
+                countFive++;
+            } else if (count == 3) {
+                countThree++;
+            }
+        }
+        int numSpecialCases = Math.min(countFive, countThree);
+        price -= 5 * numSpecialCases;
 
         return price;
     }
