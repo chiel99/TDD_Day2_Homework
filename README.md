@@ -1,5 +1,8 @@
 # TDD_Day2_Homework
 
+[![Build Status](https://api.travis-ci.org/chiel99/TDD_Day2_Homework.svg?branch=master)](https://travis-ci.org/chiel99/TDD_Day2_Homework)
+[![codecov](https://codecov.io/gh/chiel99/TDD_Day2_Homework/branch/master/graph/badge.svg)](https://codecov.io/gh/chiel99/TDD_Day2_Homework)
+
 ## PotterShoppingCart
 
 ### 作業規範：
