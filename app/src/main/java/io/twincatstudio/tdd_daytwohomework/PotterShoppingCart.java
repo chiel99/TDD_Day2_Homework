@@ -13,10 +13,7 @@ class PotterShoppingCart {
         int[] books = new int[MAX_SERIES];
         System.arraycopy(mBooks, 0, books, 0, mBooks.length);
 
-        int maxCount = 0;
-        for (int count : books) {
-            maxCount = Math.max(maxCount, count);
-        }
+        int maxCount = getBooksMaxCount(books);
         if (maxCount == 0) {
             return 0;
         }
@@ -37,6 +34,13 @@ class PotterShoppingCart {
         } while (countOfSeries[round++] > 0);
 
         // Handle Special case: 4+4 = 640 < 5+3 = 645
+        int numSpecialCases = getNumSpecialCases(countOfSeries);
+        price -= 5 * numSpecialCases;
+
+        return price;
+    }
+
+    private int getNumSpecialCases(int[] countOfSeries) {
         int countFive = 0;
         int countThree = 0;
         for (int count : countOfSeries) {
@@ -46,10 +50,15 @@ class PotterShoppingCart {
                 countThree++;
             }
         }
-        int numSpecialCases = Math.min(countFive, countThree);
-        price -= 5 * numSpecialCases;
+        return Math.min(countFive, countThree);
+    }
 
-        return price;
+    private int getBooksMaxCount(int[] books) {
+        int maxCount = 0;
+        for (int count : books) {
+            maxCount = Math.max(maxCount, count);
+        }
+        return maxCount;
     }
 
     private double getDiscount(int countOfSeries) {
